@@ -28,7 +28,7 @@ dotnet ef database update
 
 You can run both the API and the Web frontend simultaneously using either **Visual Studio** or **VS Code**:
 
-#### Option A: Using Visual Studio (Recommended)
+#### Option A: Using Visual Studio 
 1. Right-click the **Solution** in **Solution Explorer** and select **Properties**.
 2. Go to **Common Properties > Startup Project** and select **Multiple startup projects**.
 3. Set the **Action** to **Start** for both projects.
