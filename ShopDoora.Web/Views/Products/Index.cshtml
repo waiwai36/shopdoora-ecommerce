@@ -1,0 +1,102 @@
+@model ShopDoora.Web.Models.PagedResult<ShopDoora.Web.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Products Management";
+    var isAdmin = Context.Session.GetString("UserRole") == "Admin";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold text-dark mb-1">Products</h2>
+        <p class="text-muted mb-0">Manage your store products, inventory, and pricing.</p>
+    </div>
+    <div>
+        @if (isAdmin)
+        {
+            <a asp-controller="Products" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> New Product
+            </a>
+        }
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-4">ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        @if (isAdmin)
+                        {
+                            <th class="text-end pe-4">Actions</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Items != null && Model.Items.Any())
+                    {
+                        foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-semibold">#@item.Id</td>
+                                <td>
+                                    <span class="fw-bold text-dark">@item.Name</span>
+                                </td>
+                                <td class="text-muted">@(item.Description ?? "-")</td>
+                                <td>
+                                    <span class="text-success fw-semibold">$@item.Price.ToString("N2")</span>
+                                </td>
+                                <td>
+                                    @if (item.Stock > 0)
+                                    {
+                                        <span class="badge bg-success bg-opacity-10 text-success px-2 py-1">@item.Stock in stock</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger bg-opacity-10 text-danger px-2 py-1">Out of stock</span>
+                                    }
+                                </td>
+                                @if (isAdmin)
+                                {
+                                    <td class="text-end pe-4">
+                                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="@(isAdmin ? 6 : 5)" class="text-center py-4 text-muted">
+                                No products found.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination -->
+@if (Model.TotalPages > 1)
+{
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                    <a class="page-link" asp-controller="Products" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

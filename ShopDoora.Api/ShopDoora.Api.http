@@ -1,0 +1,6 @@
+@ShopDoora.Api_HostAddress = http://localhost:5246
+
+GET {{ShopDoora.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

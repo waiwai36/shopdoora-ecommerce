@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Both Projects",
+      "dependsOn": [
+        "Run API",
+        "Run Web"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run API",
+      "type": "shell",
+      "command": "dotnet run --project ShopDoora.Api/ShopDoora.Api.csproj",
+      "isBackground": true,
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Run Web",
+      "type": "shell",
+      "command": "dotnet run --project ShopDoora.Web/ShopDoora.Web.csproj",
+      "isBackground": true,
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

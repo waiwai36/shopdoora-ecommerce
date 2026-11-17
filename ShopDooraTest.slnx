@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ShopDoora.Api/ShopDoora.Api.csproj" />
+  <Project Path="ShopDoora.Web/ShopDoora.Web.csproj" />
+</Solution>

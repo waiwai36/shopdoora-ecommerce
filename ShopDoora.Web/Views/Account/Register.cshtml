@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0 rounded-4 p-4">
+            <div class="text-center mb-4">
+                <i class="bi bi-person-plus text-success display-5 mb-2"></i>
+                <h3 class="fw-bold text-dark">Create Account</h3>
+                <p class="text-muted small">Join ShopDoora system today</p>
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show py-2 small" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i> @ViewBag.Error
+                    <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+                        <input type="text" name="fullName" class="form-control border-start-0 bg-light" placeholder="Enter your full name" required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                        <input type="email" name="email" class="form-control border-start-0 bg-light" placeholder="name@example.com" required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-muted"></i></span>
+                        <input type="password" name="password" class="form-control border-start-0 bg-light" placeholder="••••••••" required />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold small">Role</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-shield-lock text-muted"></i></span>
+                        <select name="role" class="form-select border-start-0 bg-light">
+                            <option value="User">User</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-grid mb-3">
+                    <button type="submit" class="py-2 btn btn-success fw-semibold shadow-sm">
+                        <i class="bi bi-check-circle me-1"></i> Register
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <span class="text-muted small">Already have an account?</span>
+                    <a asp-controller="Account" asp-action="Login" class="text-decoration-none small fw-semibold ms-1">Sign in here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
